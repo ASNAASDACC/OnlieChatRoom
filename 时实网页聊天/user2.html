@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>user2</title>
+  <link rel="stylesheet" href="./common.css">
+</head>
+<body>
+  <div class="container">
+
+    <div class="comment">
+      <h1>聊天室</h1>
+      <ul>
+      </ul>
+    </div>
+
+    <div class="wrapper">
+      <textarea  id="tx" placeholder="善于结善缘，恶语伤人心。" rows="2" maxlength="200"></textarea>
+      </div>
+    <button>发布</button>
+  </div>
+
+  <script>
+    function print(){
+      let len=localStorage.getItem('client1')?JSON.parse(localStorage.getItem('client1')).length:0
+for(let i=0;i<len;i++)
+  client1[i]=JSON.parse(localStorage.getItem('client1'))[i]
+      ul.innerHTML=''
+      for(let i=0;i<client1.length;i++){
+        const li=document.createElement('li')
+        ul.appendChild(li)
+        li.innerHTML=client1[i]
+    }
+  }
+    const tx=  document.querySelector('#tx')
+   const total=document.querySelector('.total')
+   const box=document.querySelector('.container')
+   const ul=document.querySelector('.comment ul')
+   //评论模块
+   const time1=new Date()
+   const client1=[]
+print()
+tx.addEventListener('keyup',function(e){
+    if(e.key==='Enter'){
+      if(tx.value.trim() !==''){
+        //时间模块
+        const date1=new Date()
+        const time1=date1.toLocaleString()
+        const li=document.createElement('li')
+        client1.push(`user2:<br>${tx.value}<p>${time1}</p><hr>`)
+        localStorage.setItem('client1',JSON.stringify(client1))
+        // li.innerHTML=client1[client1.length-1]
+        ul.insertBefore(li,ul.children[0])
+        print()
+        tx.value=''
+        tx.innerHTML=''
+      }
+    }
+  })
+  setInterval(function(){
+    print()
+  },300)
+  </script>
+</body>
+</html>
